@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat v0.1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div>
+    <div>
+        <h2 style="margin: 0rem">Chat v0.1</h2>
+        <h2 style="margin: 0rem 0rem 0.5rem 0rem">Made with Flask, Flask-SocketIO</h2>
+    </div>
+    <div>
+        <input type="text" id="chat-text" placeholder="Enter your message">
+        <input type="button" id="submit-btn" value="Send">
+    </div>
+    <div id="messages">
+        <!-- Chat -->
+    </div>
+</div>
+<script>
+    const socket = io();
+
+    let messages = document.getElementById("messages");
+
+    // Client creates a channel to the server
+    socket.emit("connecting");
+
+    // Main channel
+    socket.on("connection_approved", (sid) => {
+        let connectedMessage = document.createElement("p");
+        connectedMessage.innerText = `User ${sid} has connected`;
+        messages.appendChild(connectedMessage);
+    });
+
+    // Variables
+    let text = document.getElementById("chat-text");
+    let submit = document.getElementById("submit-btn");
+
+    submit.addEventListener("click", e => {
+        e.preventDefault();
+
+        let message = {
+            "chat": text.value
+        };
+
+        // Clears chat input
+        text.value = "";
+
+        // Routes the message to the server
+        socket.emit("messaging", message);
+    });
+
+    socket.on("chat_message", (data) => {
+        let chatMessage = document.createElement("p");
+        chatMessage.innerText = `User ${data["id"]} says: ${data["message"]["chat"]}`;
+        messages.appendChild(chatMessage);
+    });
+</script>
+</body>
+</html>
