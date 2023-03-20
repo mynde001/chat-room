@@ -21,44 +21,8 @@
         <!-- Chat -->
     </div>
 </div>
-<script>
-    const socket = io();
 
-    let messages = document.getElementById("messages");
+<script src="../static/script.js"></script>
 
-    // Client creates a channel to the server
-    socket.emit("connecting");
-
-    // Main channel
-    socket.on("connection_approved", (sid) => {
-        let connectedMessage = document.createElement("p");
-        connectedMessage.innerText = `User ${sid} has connected`;
-        messages.appendChild(connectedMessage);
-    });
-
-    // Variables
-    let text = document.getElementById("chat-text");
-    let submit = document.getElementById("submit-btn");
-
-    submit.addEventListener("click", e => {
-        e.preventDefault();
-
-        let message = {
-            "chat": text.value
-        };
-
-        // Clears chat input
-        text.value = "";
-
-        // Routes the message to the server
-        socket.emit("messaging", message);
-    });
-
-    socket.on("chat_message", (data) => {
-        let chatMessage = document.createElement("p");
-        chatMessage.innerText = `User ${data["id"]} says: ${data["message"]["chat"]}`;
-        messages.appendChild(chatMessage);
-    });
-</script>
 </body>
 </html>
