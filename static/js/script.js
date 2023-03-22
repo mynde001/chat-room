@@ -13,13 +13,13 @@ socket.on("user_connect", data => {
     messages.appendChild(connectedMessage);
 
     data["online_users"].forEach(id => {
-        // Appends a session ID to online users' list and logs it in user array
+        // Appends a session ID to online users' list and logs it in sessionIDLog array
         // Check performed in order to avoid duplication of session IDs in online users' list when broadcasting
         if (!sessionIDLog.includes(id)) {
             let userOnline = document.createElement("p");
             userOnline.innerText = id;
             users.appendChild(userOnline);
-            sessionIDLog.push(id)
+            sessionIDLog.push(id);
         };
     });
 });
@@ -62,4 +62,7 @@ socket.on("user_disconnect", sid => {
             p.remove();
         };
     };
+
+    // Deletes inactive users from sessionIDLog
+    sessionIDLog.splice(sessionIDLog.indexOf(sid), 1);
 });

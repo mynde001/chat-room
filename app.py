@@ -18,10 +18,7 @@ online_users = []
 def on_connect():
     sid = request.sid
     online_users.append(sid)
-
     emit("user_connect", {"id": sid, "online_users": online_users}, broadcast=True)
-
-    print(online_users)
 
 # Chat
 @socketio.on("messaging")
