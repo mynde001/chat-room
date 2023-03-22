@@ -5,24 +5,37 @@
     <title>Chat v0.1</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/chat.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/text.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/users.css" />
 </head>
 <body>
 
-<div>
-    <div>
-        <h2 style="margin: 0rem">Chat v0.1</h2>
-        <h2 style="margin: 0rem 0rem 0.5rem 0rem">Made with Flask, Flask-SocketIO</h2>
+<main>
+    <div> <!-- To center chat & users -->
+        <div id="chat-users">
+            <div id="chat">
+                <div id="messages">
+                    <!-- User messages -->
+                </div>
+            </div>
+
+            <div id="users">
+                <div id="user">
+                    <!-- List of users -->
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
+
+    <div id="chat-entry">
         <input type="text" id="chat-text" placeholder="Enter your message">
         <input type="button" id="submit-btn" value="Send">
     </div>
-    <div id="messages">
-        <!-- Chat -->
-    </div>
-</div>
+</main>
 
-<script src="../static/script.js"></script>
+<script src="../static/js/script.js"></script>
 
 </body>
 </html>

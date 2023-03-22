@@ -1,0 +1,6 @@
+#chat {
+    width: 50rem;
+    overflow-y: scroll;
+    display: flex;
+    align-content: flex-start;
+}

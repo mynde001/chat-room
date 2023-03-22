@@ -9,12 +9,19 @@ socketio = SocketIO(app)
 def main():
     return render_template("main.html")
 
+# Tracks online users
+online_users = []
+
 # Initial connection, public announcement of connection
 # sid = Session ID
 @socketio.on("connect")
 def on_connect():
     sid = request.sid
-    emit("user_connect", sid, broadcast=True)
+    online_users.append(sid)
+
+    emit("user_connect", {"id": sid, "online_users": online_users}, broadcast=True)
+
+    print(online_users)
 
 # Chat
 @socketio.on("messaging")
@@ -26,6 +33,7 @@ def send_message(message):
 @socketio.on("disconnect")
 def user_disconnect():
     sid = request.sid
+    online_users.remove(sid)
     emit("user_disconnect", sid, broadcast=True)
 
 if __name__ == "__main__":
