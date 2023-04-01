@@ -3,3 +3,7 @@
     min-width: 8rem;
     max-width: 8rem;
 }
+
+#user p {
+    white-space: nowrap;
+}

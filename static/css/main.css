@@ -1,23 +1,16 @@
-main > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 #chat-users {
     display: flex;
-    border: solid 4px blue;
+    border: ridge rgba(179, 179, 179, 0.5);
+    border-width: 1.5mm 1.5mm 0 1.5mm;
     height: 30rem;
+    max-width: 50rem;
+    min-width: 25rem;
+    margin: auto;
 }
 
 p {
-    font-family: "Times New Roman";
-    /*font-family: 'TheGoodMonolith', sans-serif;*/
-    /*font-weight: bold;*/
-    font-size: 1.15rem;
+    font-family: Arial;
+    font-size: 0.9rem;
+    font-weight: lighter;
     margin: 0.3rem;
-}
-
-#user p {
-    white-space: nowrap;
 }

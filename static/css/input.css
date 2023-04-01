@@ -1,0 +1,17 @@
+#chat-input-div {
+    text-align: center;
+    margin-top: 0;
+}
+
+input {
+    min-width: 25.65rem;
+    max-width: 50.65rem;
+    width: 100%;
+    box-sizing: border-box;
+    border: ridge rgba(179, 179, 179, 0.5);
+    border-width: 0.5mm 1.5mm 1.5mm 1.5mm;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}

@@ -2,7 +2,7 @@
 
 const socket = io();
 
-let messages = document.getElementById("messages");
+let messages = document.getElementById("chat");
 let users = document.getElementById("user");
 let sessionIDLog = [];
 
@@ -24,30 +24,30 @@ socket.on("user_connect", data => {
     });
 });
 
-// Variables
-let text = document.getElementById("chat-text");
-let submit = document.getElementById("submit-btn");
+let text = document.getElementById("chat-input");
 
-submit.addEventListener("click", e => {
-    e.preventDefault();
+text.addEventListener("keypress", e => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
 
-    let message = {
-        "chat": text.value
-    };
+        let message = {
+            "user_message": text.value
+        };
 
-    // Clears chat input
-    text.value = "";
+        // Clears chat input
+        text.value = "";
 
-    // Routes the message to the server
-    if (message["chat"] !== "") {
-        socket.emit("messaging", message);
-    };
+        // Routes the message to the server
+        if (message["user_message"] !== "") {
+            socket.emit("messaging", message);
+        };
+    }
 });
 
 // Chat
 socket.on("chat_message", data => {
     let chatMessage = document.createElement("p");
-    chatMessage.innerHTML = `<strong>&lt;${data["id"]}&gt;</strong> ${data["message"]["chat"]}`;
+    chatMessage.innerHTML = `<strong>&lt;${data["id"]}&gt;</strong> ${data["message"]["user_message"]}`;
     messages.appendChild(chatMessage);
 });
 
@@ -57,6 +57,7 @@ socket.on("user_disconnect", sid => {
     disconnectMessage.innerHTML = `User <strong>&lt;${sid}&gt;</strong> has disconnected`;
     messages.appendChild(disconnectMessage);
 
+    // Removes inactive user(s) from online users list
     for (let p of users.children) {
         if (p.innerText === sid) {
             p.remove();

@@ -1,6 +1,10 @@
-#chat {
+#chat-users > div {
     width: 50rem;
     overflow-y: scroll;
     display: flex;
     align-content: flex-start;
+}
+
+#chat p {
+    word-break: break-all;
 }

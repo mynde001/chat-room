@@ -9,6 +9,9 @@ socketio = SocketIO(app)
 def main():
     return render_template("main.html")
 
+# emit creates events to send data (sends messages)
+# socketio.on listens for specific events to collect data
+
 # Tracks online users
 online_users = []
 
